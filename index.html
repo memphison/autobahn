@@ -84,7 +84,113 @@
   .btn-primary:hover{background:var(--cta-hi);transform:translateY(-1px)}
   .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
   .btn-ghost:hover{border-color:var(--m-blue);color:#fff}
-  @media(max-width:840px){nav .links{display:none}}
+  
+  .menu-toggle{
+    display:none;
+    width:42px;
+    height:42px;
+    border:1px solid var(--line);
+    border-radius:3px;
+    background:rgba(22,27,34,.72);
+    color:var(--ink);
+    cursor:pointer;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+    backdrop-filter:blur(10px);
+    transition:background .2s ease,border-color .2s ease;
+  }
+  .menu-toggle:hover{background:var(--panel);border-color:#3A4654}
+  .menu-toggle span{
+    position:relative;
+    display:block;
+    width:18px;
+    height:1.5px;
+    background:currentColor;
+    transition:background .2s ease;
+  }
+  .menu-toggle span::before,
+  .menu-toggle span::after{
+    content:"";
+    position:absolute;
+    left:0;
+    width:18px;
+    height:1.5px;
+    background:currentColor;
+    transition:transform .25s ease,top .25s ease;
+  }
+  .menu-toggle span::before{top:-6px}
+  .menu-toggle span::after{top:6px}
+  .menu-toggle[aria-expanded="true"] span{background:transparent}
+  .menu-toggle[aria-expanded="true"] span::before{top:0;transform:rotate(45deg)}
+  .menu-toggle[aria-expanded="true"] span::after{top:0;transform:rotate(-45deg)}
+
+  .mobile-menu{
+    display:none;
+    position:absolute;
+    top:calc(100% + 8px);
+    right:clamp(20px,5vw,64px);
+    width:min(250px,calc(100vw - 40px));
+    padding:8px;
+    background:rgba(22,27,34,.96);
+    border:1px solid var(--line);
+    border-radius:4px;
+    box-shadow:0 18px 50px rgba(0,0,0,.38);
+    backdrop-filter:blur(14px);
+    opacity:0;
+    transform:translateY(-8px) scale(.98);
+    transform-origin:top right;
+    pointer-events:none;
+    transition:opacity .2s ease,transform .2s ease;
+  }
+  .mobile-menu.open{
+    opacity:1;
+    transform:none;
+    pointer-events:auto;
+  }
+  .mobile-menu a{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    min-height:42px;
+    padding:10px 12px;
+    border-radius:2px;
+    color:#C6CBD3;
+    font-size:.88rem;
+    transition:background .18s ease,color .18s ease;
+  }
+  .mobile-menu a:hover{
+    background:var(--panel);
+    color:#fff;
+  }
+  .mobile-menu a::after{
+    content:"";
+    width:4px;
+    height:4px;
+    border-top:1px solid currentColor;
+    border-right:1px solid currentColor;
+    transform:rotate(45deg);
+    opacity:.45;
+  }
+  .mobile-menu .mobile-book{
+    margin-top:5px;
+    background:var(--cta);
+    color:#fff;
+    font-family:var(--display);
+    font-weight:700;
+  }
+  .mobile-menu .mobile-book:hover{background:var(--cta-hi)}
+
+  @media(max-width:840px){
+    nav .links{display:none}
+    .menu-toggle{display:inline-flex}
+    .mobile-menu{display:block}
+    header{padding-top:14px;padding-bottom:14px}
+  }
+  @media(min-width:841px){
+    .mobile-menu{display:none!important}
+  }
+
 
   /* ---- Hero ---- */
   .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
@@ -284,6 +390,20 @@
       <a class="btn btn-primary" href="#book">Book service</a>
     </div>
   </nav>
+
+  <button class="menu-toggle" id="menuToggle" type="button"
+    aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span aria-hidden="true"></span>
+  </button>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#top">Home</a>
+    <a href="#services">Services</a>
+    <a href="#heritage">Every BMW</a>
+    <a href="#diagnostics">Diagnostics</a>
+    <a href="#reviews">Reviews</a>
+    <a class="mobile-book" href="#book">Book service</a>
+  </div>
 </header>
 
 <main id="top">
@@ -447,6 +567,41 @@
   // Scroll reveal
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
   document.querySelectorAll('.rise').forEach((el,i)=>{el.style.transitionDelay=(i%4*60)+'ms';io.observe(el)});
+
+  // Compact mobile navigation
+  const menuToggle=document.getElementById('menuToggle');
+  const mobileMenu=document.getElementById('mobileMenu');
+
+  function closeMobileMenu(){
+    mobileMenu.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded','false');
+    menuToggle.setAttribute('aria-label','Open navigation menu');
+  }
+
+  menuToggle.addEventListener('click',(event)=>{
+    event.stopPropagation();
+    const isOpen=mobileMenu.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded',String(isOpen));
+    menuToggle.setAttribute('aria-label',isOpen?'Close navigation menu':'Open navigation menu');
+  });
+
+  mobileMenu.querySelectorAll('a').forEach(link=>{
+    link.addEventListener('click',closeMobileMenu);
+  });
+
+  document.addEventListener('click',(event)=>{
+    if(!mobileMenu.contains(event.target) && !menuToggle.contains(event.target)){
+      closeMobileMenu();
+    }
+  });
+
+  document.addEventListener('keydown',(event)=>{
+    if(event.key==='Escape') closeMobileMenu();
+  });
+
+  addEventListener('resize',()=>{
+    if(innerWidth>840) closeMobileMenu();
+  });
 </script>
 </body>
 </html>
