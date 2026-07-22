@@ -173,7 +173,8 @@
   .info .row{background:var(--asphalt-2);padding:18px 22px;display:flex;justify-content:space-between;gap:16px;align-items:baseline}
   .info .row .lab{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
   .info .row .val{text-align:right;font-size:.96rem}
-  .book-widget{background:var(--asphalt-2);border:1px solid var(--line);border-radius:3px;padding:8px}
+  .book-widget{background:var(--asphalt-2);border:1px solid var(--line);border-radius:3px;padding:8px;min-height:520px;overflow:hidden}
+  .book-widget iframe{width:100%!important;max-width:100%;border:0}
   /* Square embed slot */
   .square-slot{
     min-height:520px;border-radius:2px;background:var(--panel);
@@ -315,21 +316,15 @@
         </div>
       </div>
       <div class="book-widget rise">
-        <!-- ============================================================
-             SQUARE APPOINTMENTS EMBED GOES HERE
-             After you create your free Square account and set up your
-             services, Square gives you a booking-site URL like:
-               https://squareup.com/appointments/book/XXXXXXX/services
-             Replace the whole .square-slot block below with Square's
-             embed snippet, OR just point the button at your booking URL.
-             ============================================================ -->
-        <div class="square-slot">
-          <div class="badge">◱ Powered by Square Appointments</div>
-          <h4>Online booking loads here</h4>
-          <p>Paste your Square booking embed in place of this box, or link the button to your Square booking page.</p>
-          <a class="btn btn-primary" href="https://squareup.com/appointments" id="squareBtn" target="_blank" rel="noopener">Open booking →</a>
-          <p style="margin-top:18px;font-size:.78rem">Swap <code>#squareBtn</code> href for your live URL</p>
-        </div>
+        <!-- Start Square Appointments Embed Code -->
+        <script src="https://square.site/appointments/buyer/widget/91ucbs38cdinv2/L0CTBVT7RDHEM.js"></script>
+        <!-- End Square Appointments Embed Code -->
+        <noscript>
+          <p style="padding:24px;text-align:center">
+            JavaScript is required for embedded booking.
+            <a href="https://app.squareup.com/appointments/book/91ucbs38cdinv2/L0CTBVT7RDHEM/start" target="_blank" rel="noopener noreferrer" style="color:var(--cta-hi);text-decoration:underline">Book directly with Square</a>.
+          </p>
+        </noscript>
       </div>
     </div>
   </section>
