@@ -63,7 +63,7 @@
   header.solid{background:rgba(15,19,24,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   .brand{display:flex;align-items:center;gap:12px}
   .brand .tick{width:26px;height:12px;overflow:hidden;border-radius:1px}
-  .brand .name{font-family:var(--display);font-weight:900;letter-spacing:.02em;font-size:1.02rem}
+  .brand .name{font-family:Helvetica,Arial,sans-serif;font-weight:700;letter-spacing:-.025em;font-size:1.08rem;text-transform:lowercase}
   .brand .sub{font-family:var(--mono);font-size:.6rem;letter-spacing:.24em;color:var(--mute);text-transform:uppercase;line-height:1;margin-top:2px}
   nav .links{display:flex;gap:30px;align-items:center}
   nav .links a{font-size:.86rem;color:var(--mute);transition:color .2s}
@@ -164,6 +164,60 @@
   .split .copy li .dot{width:7px;height:7px;margin-top:8px;background:var(--m-blue);border-radius:1px;flex:none}
   @media(max-width:820px){.split{grid-template-columns:1fr}.split .media{min-height:260px}}
 
+
+  /* ---- Customer reviews ---- */
+  .reviews{
+    background:var(--asphalt-2);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .reviews-inner{
+    max-width:1240px;
+    margin:0 auto;
+    padding:clamp(64px,9vw,112px) clamp(20px,5vw,64px);
+  }
+  .reviews-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+  }
+  .review-card{
+    background:var(--asphalt);
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:28px 26px;
+    display:flex;
+    flex-direction:column;
+    min-height:250px;
+  }
+  .review-stars{
+    color:var(--m-blue);
+    letter-spacing:3px;
+    font-size:.95rem;
+    margin-bottom:18px;
+  }
+  .review-card blockquote{
+    color:#D6DAE0;
+    font-size:1rem;
+    line-height:1.65;
+    flex:1;
+  }
+  .review-card cite{
+    margin-top:22px;
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--mute);
+    font-style:normal;
+  }
+  .review-actions{
+    margin-top:30px;
+    display:flex;
+    justify-content:flex-end;
+  }
+  @media(max-width:900px){.reviews-grid{grid-template-columns:1fr}}
+
   /* ---- Booking ---- */
   .book{max-width:1240px;margin:0 auto;padding:clamp(64px,9vw,120px) clamp(20px,5vw,64px)}
   .book-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
@@ -209,7 +263,7 @@
   <a class="brand" href="#top">
     <span class="tick"><span class="mstripe"><span class="a"></span><span class="b"></span><span class="c"></span></span></span>
     <span>
-      <span class="name">AUTOBAHN</span>
+      <span class="name">autobahn</span>
       <span class="sub">Service Center · Savannah</span>
     </span>
   </a>
@@ -218,6 +272,7 @@
       <a href="#services">Services</a>
       <a href="#heritage">Every BMW</a>
       <a href="#diagnostics">Diagnostics</a>
+      <a href="#reviews">Reviews</a>
       <a href="#book">Book</a>
       <a class="btn btn-primary" href="#book">Book service</a>
     </div>
@@ -255,7 +310,7 @@
     <div class="sec-head">
       <div>
         <div class="divider"><span class="mstripe" style="display:flex;height:100%"><span class="a"></span><span class="b"></span><span class="c"></span></span></div>
-        <h2 class="rise">Some of Our Specialties</h2>
+        <h2 class="rise">What we take care of</h2>
       </div>
       <p class="eyebrow rise" style="max-width:300px;text-align:right">Factory-grade parts &amp; procedures.<br>Priced like an independent.</p>
     </div>
@@ -263,7 +318,7 @@
       <div class="card"><div class="no">01 / OIL &amp; FLUIDS</div><h3>Oil &amp; fluid service</h3><p>Full-synthetic changes to BMW spec, plus brake, coolant and transmission fluid on schedule.</p></div>
       <div class="card"><div class="no">02 / BRAKES</div><h3>Brakes &amp; rotors</h3><p>Pads, rotors and sensors — with the brake-wear reset done properly so the cluster clears.</p></div>
       <div class="card"><div class="no">03 / DIAGNOSTICS</div><h3>Diagnostics &amp; coding</h3><p>Dealer-level scan tools to read faults, code modules and retrofit — no guesswork.</p></div>
-      <div class="card"><div class="no">04 / COOLING</div><h3>A/C Service &amp; Recharge</h3><p>Air-conditioning performance check, leak inspection, and refrigerant recharge.</p></div>
+      <div class="card"><div class="no">04 / INSPECTION</div><h3>State &amp; safety inspection</h3><p>Georgia emissions where required, plus a free multi-point check on every visit.</p></div>
       <div class="card"><div class="no">05 / CHASSIS</div><h3>Suspension &amp; steering</h3><p>Control arms, bushings, struts and alignment to keep the car tracking straight and tight.</p></div>
       <div class="card"><div class="no">06 / PRE-BUY</div><h3>Pre-purchase inspection</h3><p>Buying a used BMW? Bring it here first. We'll tell you what it really needs.</p></div>
     </div>
@@ -297,6 +352,43 @@
           <li><span class="dot"></span><span><b>Coding &amp; retrofits</b> — enable features, program keys, register batteries.</span></li>
           <li><span class="dot"></span><span><b>Honest quotes</b> — you approve the work before a wrench moves.</span></li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CUSTOMER REVIEWS -->
+  <section class="reviews" id="reviews">
+    <div class="reviews-inner">
+      <div class="sec-head rise">
+        <div>
+          <div class="divider"><span class="mstripe" style="display:flex;height:100%"><span class="a"></span><span class="b"></span><span class="c"></span></span></div>
+          <h2>Customer Reviews</h2>
+        </div>
+      </div>
+
+      <div class="reviews-grid">
+        <article class="review-card rise">
+          <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“My daughter will be attending school here, and I will definitely make sure that anything she has to have done to her car will be through the Autobahn Service Center. Thank you guys.”</blockquote>
+          <cite>Michael E.</cite>
+        </article>
+
+        <article class="review-card rise">
+          <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Highly recommend Autobahn Service Center for any type of service for your German vehicle. They are honest, trustworthy, keep their word, fairly priced and extremely knowledgeable.”</blockquote>
+          <cite>Sam K.</cite>
+        </article>
+
+        <article class="review-card rise">
+          <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“Autobahn Service Center has earned my trust for life. From now on, this is the only place I will take my vehicle for service. Highly recommended!”</blockquote>
+          <cite>Tamika B.</cite>
+        </article>
+      </div>
+
+      <div class="review-actions rise">
+        <a class="btn btn-ghost" href="https://www.google.com/search?sca_esv=75280e57e4653e14&rlz=1C1CHBF_enUS981US982&sxsrf=APpeQnvEmY3Q2I_2ut_MWl9m_st0ULXbJQ:1784752414212&si=APenkKn5T4YN59srr511wD6k6Pufj9DEzRUvB1XJSwUeeT5afngnQKXfFPSk26GnVTc5nOufp5N1YIRrxYK2YD0AlQ3mJkr9ycs_dGf1nAhBJyNMOFhqfbgQCIXE0ua0Vr1dcCEEammZo6TtAbSCnzSnHY9LvQFI4A%3D%3D&q=Autobahn+Service+Center+Inc.+Reviews&sa=X&ved=2ahUKEwiU0KTtkOeVAxUBHYYAHUZNJhsQ0bkNegQIJBAF&biw=1249&bih=769&dpr=1.03#" target="_blank" rel="noopener noreferrer">Leave a Google review →</a>
       </div>
     </div>
   </section>
