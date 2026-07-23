@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -349,7 +350,9 @@
   
   .book-widget{background:var(--asphalt-2);border:1px solid var(--line);border-radius:3px;padding:8px;min-height:520px;overflow:hidden}
   .book-widget iframe{width:100%!important;max-width:100%;border:0}
-  /* Square embed slot */
+  .book-widget .breely-inline{width:100%;min-height:520px}
+  .book-widget .breely-inline iframe{display:block;width:100%!important;min-height:520px;border:0}
+  /* Booking embed slot */
   .square-slot{
     min-height:520px;border-radius:2px;background:var(--panel);
     display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
@@ -552,19 +555,20 @@
 
       <div class="book-widget rise">
         <!-- Start Square Appointments Embed Code -->
-        <script src="https://square.site/appointments/buyer/widget/91ucbs38cdinv2/L0CTBVT7RDHEM.js"></script>
+        <script type="text/javascript" src="https://autobahn-service-center.breely.com/embed.js?url=%2Fform%2F21343"></script>
+        <div class="breely-inline" data-url="https://autobahn-service-center.breely.com/form/21343"></div>
         <!-- End Square Appointments Embed Code -->
 
         <noscript>
           <p style="padding:24px;text-align:center">
             JavaScript is required for embedded booking.
             <a
-              href="https://app.squareup.com/appointments/book/91ucbs38cdinv2/L0CTBVT7RDHEM/start"
+              href="https://autobahn-service-center.breely.com/form/21343"
               target="_blank"
               rel="noopener noreferrer"
               style="color:var(--cta-hi);text-decoration:underline"
             >
-              Book directly with Square
+              Book directly with Breely
             </a>.
           </p>
         </noscript>
